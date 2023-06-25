@@ -2,9 +2,12 @@ package com.better.backend_app.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.sql.Time;
-
+@Getter
+@Setter
 @Entity
 @Table(name = "timeSlots")
 public class TimeSlot {
