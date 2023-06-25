@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -20,6 +21,9 @@ public class ActivityDate {
     @Column
     LocalDate date;
 
+    @Column
+    DayOfWeek dayOfWeek;
+
     @OneToMany(mappedBy = "activityDate")
     @JsonIgnoreProperties({"activityDate"})
     private List<TimeSlot> timeSlots;
@@ -29,8 +33,27 @@ public class ActivityDate {
     @JsonIgnoreProperties
     private Activity activity;
 
+
     public ActivityDate() {
 
     }
 
+    public void setDate() {
+        this.date = LocalDate.now();
+    }
+
+    public void setDayOfWeek(LocalDate localDate) {
+        localDate.getDayOfWeek();
+    }
+
+    @Override
+    public String toString() {
+        return "ActivityDate{" +
+                "id=" + id +
+                ", date=" + date +
+                ", dayOfWeek=" + dayOfWeek +
+                ", timeSlots=" + timeSlots +
+                ", activity=" + activity +
+                '}';
+    }
 }
