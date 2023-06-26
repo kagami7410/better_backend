@@ -30,5 +30,7 @@ public class Activity {
     @JsonIgnoreProperties({"activity"})
     List<ActivityDate> activityDates;
 
-
+    public void setActivityDates(List<ActivityDate> activityDates) {
+        this.activityDates = activityDates;
+    }
 }

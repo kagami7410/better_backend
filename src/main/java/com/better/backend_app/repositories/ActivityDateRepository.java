@@ -1,7 +1,7 @@
 package com.better.backend_app.repositories;
 
-import com.better.backend_app.models.Activity;
+import com.better.backend_app.models.ActivityDate;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface ActivityDateRepository extends JpaRepository<Activity, Long> {
+public interface ActivityDateRepository extends JpaRepository<ActivityDate, Long> {
 }

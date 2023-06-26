@@ -9,10 +9,7 @@ public class BackendAppApplication {
 
 	public static void main(String[] args) {
 		var context = SpringApplication.run(BackendAppApplication.class, args);
-		ActivityDate activityDate = context.getBean(ActivityDate.class);
-		activityDate.setDate();
-		activityDate.setDayOfWeek(activityDate.getDate());
-		System.out.println(activityDate.toString());
+
 	}
 
 }
