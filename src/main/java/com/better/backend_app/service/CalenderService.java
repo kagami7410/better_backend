@@ -1,8 +1,8 @@
 package com.better.backend_app.service;
 
-import com.better.backend_app.config.CalenderConfig;
 import com.better.backend_app.models.Activity;
 import com.better.backend_app.models.ActivityDate;
+import com.better.backend_app.models.TimeSlot;
 import com.better.backend_app.repositories.ActivityDateRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -11,6 +11,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
+import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
@@ -26,8 +27,6 @@ public class CalenderService {
     @Autowired
     ActivityDateRepository activityDateRepository;
 
-    @Autowired
-    CalenderConfig calenderConfig;
 
 
     public void addDates() {
@@ -49,23 +48,21 @@ public class CalenderService {
 
     }
 
-    public List<LocalDate> activityDatesofSevenDays() {
-        LocalDate dateToday = LocalDate.now();
-        LocalDate dateLater = dateToday.plusDays(7);
-        long numOfDays = ChronoUnit.DAYS.between(dateToday, dateLater);
-
-        List<LocalDate> listOfDates = Stream.iterate(dateToday, date -> date.plusDays(1))
-                .limit(numOfDays)
-                .collect(Collectors.toList());
-
-        return listOfDates;
-
-
+    public List<ActivityDate> createActivityDatesofSevenDays() {
+        int daysInWeek = 7;
+        List<ActivityDate> activityDates = new ArrayList<>();
+        for(int i = 0; i < daysInWeek; i++){
+            ActivityDate activityDate = new ActivityDate();
+            activityDate.setDate(LocalDate.now().plusDays(i));
+            activityDate.setDayOfWeek(LocalDate.now().plusDays(i));
+            activityDates.add(activityDate);
+            activityDateRepository.save(activityDate);
+        }
+        return activityDates;
     }
 
-
-    public List<ActivityDate> activityDatesList(){
-        return calenderConfig.createActivityDates();
+    public DayOfWeek getDay(){
+        return LocalDate.now().getDayOfWeek();
     }
 
 

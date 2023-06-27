@@ -21,7 +21,10 @@ public class LeisureCentre {
     @Column
     private String Location;
 
-    @OneToMany(mappedBy = "leisureCentre")
+    @OneToMany(mappedBy = "leisureCentre",cascade = CascadeType.REMOVE)
     @JsonIgnoreProperties({"leisureCentre"})
     private List<Activity> activities;
+
+    public LeisureCentre() {
+    }
 }

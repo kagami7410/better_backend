@@ -24,7 +24,7 @@ public class ActivityDate {
     @Column
     DayOfWeek dayOfWeek;
 
-    @OneToMany(mappedBy = "activityDate")
+    @OneToMany(mappedBy = "activityDate", cascade = CascadeType.REMOVE)
     @JsonIgnoreProperties({"activityDate"})
     private List<TimeSlot> timeSlots;
 
@@ -43,7 +43,7 @@ public class ActivityDate {
     }
 
     public void setDayOfWeek(LocalDate localDate) {
-        localDate.getDayOfWeek();
+        this.dayOfWeek = localDate.getDayOfWeek();
     }
 
     @Override

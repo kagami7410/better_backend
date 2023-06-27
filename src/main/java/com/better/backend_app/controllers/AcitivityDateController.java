@@ -3,9 +3,13 @@ package com.better.backend_app.controllers;
 
 //import com.better.backend_app.config.CalenderConfig;
 import com.better.backend_app.models.ActivityDate;
+import com.better.backend_app.repositories.ActivityDateRepository;
 import com.better.backend_app.service.CalenderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -18,6 +22,9 @@ import java.util.List;
 public class AcitivityDateController {
     @Autowired
     CalenderService calenderService;
+
+    @Autowired
+    ActivityDateRepository activityDateRepository;
 
 //    @Autowired
 //
@@ -55,7 +62,13 @@ public class AcitivityDateController {
 
     @GetMapping("/getDates")
     public List<ActivityDate> getDates() {
-        return calenderService.activityDatesList();
+        return activityDateRepository.findAll();
+    }
+
+    @DeleteMapping("/activityDate/deleteAll")
+    public ResponseEntity<String> deleteActivityDate(){
+        activityDateRepository.deleteAll();
+        return new ResponseEntity<>("All ActivityDates Deleted", HttpStatus.OK);
     }
 }
 //    @GetMapping("/getDay")

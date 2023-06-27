@@ -26,11 +26,12 @@ public class Activity {
     @JsonIgnoreProperties({"activities"})
     private LeisureCentre leisureCentre;
 
-    @OneToMany(mappedBy = "activity")
+    @OneToMany(mappedBy = "activity", cascade = CascadeType.REMOVE)
     @JsonIgnoreProperties({"activity"})
     List<ActivityDate> activityDates;
 
     public void setActivityDates(List<ActivityDate> activityDates) {
         this.activityDates = activityDates;
     }
+
 }

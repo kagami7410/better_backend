@@ -6,6 +6,9 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.sql.Time;
+import java.time.LocalTime;
+import java.util.Map;
+
 @Getter
 @Setter
 @Entity
@@ -17,10 +20,27 @@ public class TimeSlot {
     private Long id;
 
     @Column
-    private Time timeSlot;
+    private Integer startTime;
+
+    @Column
+    private Integer endTime;
+
+    @Column
+    private Boolean availability;
 
     @ManyToOne
     @JoinColumn(name = "activityDate_id")
     @JsonIgnoreProperties()
     private ActivityDate activityDate;
+
+    @Override
+    public String toString() {
+        return "TimeSlot{" +
+                "id=" + id +
+                ", startTime=" + startTime +
+                ", endTime=" + endTime +
+                ", availability=" + availability +
+                ", activityDate=" + activityDate +
+                '}';
+    }
 }
