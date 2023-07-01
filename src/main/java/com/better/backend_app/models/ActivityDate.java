@@ -24,13 +24,14 @@ public class ActivityDate {
     @Column
     DayOfWeek dayOfWeek;
 
-    @OneToMany(mappedBy = "activityDate", cascade = CascadeType.REMOVE)
-    @JsonIgnoreProperties({"activityDate"})
+    @OneToMany(mappedBy = "activityDate", cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
+    @JsonIgnoreProperties({"activityDate", "acitvity"})
     private List<TimeSlot> timeSlots;
 
     @ManyToOne
+
     @JoinColumn(name = "activity_id")
-    @JsonIgnoreProperties
+    @JsonIgnoreProperties({"leisureCentre", "activityDates"})
     private Activity activity;
 
 

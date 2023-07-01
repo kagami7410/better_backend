@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.function.Predicate;
 
 @RestController
 public class LeisureCentreController {
@@ -19,8 +20,17 @@ public class LeisureCentreController {
     }
     @PostMapping("/leisureCentre/add")
     public ResponseEntity<String> addLeiureCentre(@RequestBody LeisureCentre leisureCentre){
-        LeisureCentre newLeisureCentre = leisureCentreRepository.save(leisureCentre);
-        return new ResponseEntity<>(newLeisureCentre.getName() + " saved!", HttpStatus.OK);
+        List<LeisureCentre> leisureCentres = leisureCentreRepository.findAll();
+        boolean leisureCentreExists = leisureCentres.stream()
+                .anyMatch( leisureCentre1 -> leisureCentre1.getName().equals(leisureCentre.getName()));
+
+        if (leisureCentreExists == true){
+            return new ResponseEntity<>(leisureCentre.getName() + " already exists", HttpStatus.BAD_REQUEST);
+        }
+        else{
+            LeisureCentre newLeisureCentre = leisureCentreRepository.save(leisureCentre);
+            return new ResponseEntity<>(newLeisureCentre.getName() + " saved!", HttpStatus.CREATED);
+        }
     }
 
     @DeleteMapping("/leisureCentre/deleteAll")

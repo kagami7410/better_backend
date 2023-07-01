@@ -25,20 +25,23 @@ public class TimeSlotController {
     ActivityDateRepository activityDateRepository;
 
     @GetMapping("timeSlot/getAll")
-    public List<TimeSlot> getTimeSlot(@RequestParam Long id){
+    public List<TimeSlot> getTimeSlot(){
         return timeSlotRepository.findAll();
     }
     @PostMapping("/timeSlot/add")
-    public String addTimeSlot(@RequestParam Integer startTime, @RequestParam Integer endTime, @RequestParam Boolean availability, @RequestParam Long activityDateId){
+    public TimeSlot addTimeSlot(@RequestParam Integer startTime, @RequestParam Integer endTime, @RequestParam boolean availability, @RequestParam Long activityDateId){
         ActivityDate activityDate = activityDateRepository.findById(activityDateId).orElse(null);
         TimeSlot timeSlot = new TimeSlot();
         timeSlot.setStartTime(startTime);
         timeSlot.setEndTime(endTime);
         timeSlot.setAvailability(availability);
-        activityDate.setTimeSlots(Arrays.asList(timeSlot));
+        timeSlot.setActivityDate(activityDate);
         timeSlotRepository.save(timeSlot);
-        activityDateRepository.save(activityDate);
 
-        return  "timeSlot added! on " + activityDate.getDayOfWeek();
+//        activityDate.setTimeSlots(Arrays.asList(timeSlot));
+//        activityDateRepository.save(activityDate);
+//        timeSlotRepository.save(timeSlot);
+
+        return  timeSlot;
     }
 }

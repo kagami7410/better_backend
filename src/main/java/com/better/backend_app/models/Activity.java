@@ -5,7 +5,10 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
 
 
 @Entity
@@ -26,12 +29,18 @@ public class Activity {
     @JsonIgnoreProperties({"activities"})
     private LeisureCentre leisureCentre;
 
-    @OneToMany(mappedBy = "activity", cascade = CascadeType.REMOVE)
+    @OneToMany(mappedBy = "activity", cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
     @JsonIgnoreProperties({"activity"})
     List<ActivityDate> activityDates;
 
-    public void setActivityDates(List<ActivityDate> activityDates) {
-        this.activityDates = activityDates;
+    public void setActivityDates(Queue<ActivityDate> activityDates) {
+        List<ActivityDate> activityDateList = new ArrayList<>(activityDates);
+        this.activityDates = activityDateList;
+    }
+
+    public Queue<ActivityDate> getActivityDates(){
+        Queue<ActivityDate> queuedActivites = new LinkedList<>(this.activityDates);
+        return queuedActivites;
     }
 
 }

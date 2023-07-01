@@ -21,7 +21,7 @@ public class LeisureCentre {
     @Column
     private String Location;
 
-    @OneToMany(mappedBy = "leisureCentre",cascade = CascadeType.REMOVE)
+    @OneToMany(mappedBy = "leisureCentre",cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
     @JsonIgnoreProperties({"leisureCentre"})
     private List<Activity> activities;
 

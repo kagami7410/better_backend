@@ -26,11 +26,11 @@ public class TimeSlot {
     private Integer endTime;
 
     @Column
-    private Boolean availability;
+    private boolean availability;
 
     @ManyToOne
     @JoinColumn(name = "activityDate_id")
-    @JsonIgnoreProperties()
+    @JsonIgnoreProperties({"dayOfWeek", "timeSlots", "activity", "id"})
     private ActivityDate activityDate;
 
     @Override
