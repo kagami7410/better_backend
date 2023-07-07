@@ -5,9 +5,9 @@ pipeline {
         }
     }
 
-    tools {
-//        maven 'Maven 3.8.6'
-    }
+//    tools {
+////        maven 'Maven 3.8.6'
+//    }
 
     stages {
         stage('set up') {
