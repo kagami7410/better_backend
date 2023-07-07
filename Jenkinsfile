@@ -12,8 +12,8 @@ pipeline {
     stages {
         stage('set up') {
             steps {
-                sh 'rm -rf AquariumTrackerApp'
-                sh 'git clone https://github.com/kagami7410/AquariumTrackerApp.git '
+                sh 'rm -rf better_backend'
+                sh 'git clone https://github.com/kagami7410/better_backend.git '
 
             }
         }
@@ -25,7 +25,7 @@ pipeline {
 
             stage('docker build') {
         steps {
-            sh 'docker build -t tracker_app .'
+            sh 'docker build -t better_backend_app .'
             echo 'docker build complete!!!!!!!'
         }
     }
