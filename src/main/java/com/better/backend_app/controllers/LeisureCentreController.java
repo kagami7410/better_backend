@@ -14,6 +14,7 @@ import java.util.function.Predicate;
 public class LeisureCentreController {
     @Autowired
     LeisureCentreRepository leisureCentreRepository;
+    @CrossOrigin
     @GetMapping("/leisureCentre/getAll")
     public List<LeisureCentre> getLeisureCentre(){
         return leisureCentreRepository.findAll();
