@@ -1,3 +1,5 @@
+apply plugin: 'maven'
+
 pipeline {
     agent {
         kubernetes{
