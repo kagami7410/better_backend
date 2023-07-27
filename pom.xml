@@ -14,7 +14,7 @@
 	<name>backend_app</name>
 	<description>Demo project for Spring Boot</description>
 	<properties>
-		<java.version>8</java.version>
+		<java.version>17</java.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -62,8 +62,8 @@
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version> 3.11.0</version>
 				<configuration>
-					<source>8</source>  <!-- same as <java.version> -->
-					<target>8</target>    <!-- same as <java.version> -->
+					<source>17</source>  <!-- same as <java.version> -->
+					<target>17</target>    <!-- same as <java.version> -->
 				</configuration>
 			</plugin>
 		</plugins>
