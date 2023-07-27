@@ -12,11 +12,14 @@ pipeline {
                 sh 'git clone https://github.com/kagami7410/better_backend.git '
             }
         }
+
         stage('maven package') {
-        def mvnHOME = tool name: 'maven', type: 'maven'
         steps {
-            sh 'java -version'
-            sh '${mvnHOME}/bin/mvn clean package'
+            script{
+                    def mvnHOME = tool name: 'maven', type: 'maven'
+                    sh 'java -version'
+                    sh '${mvnHOME}/bin/mvn clean package'
+                  }
             }
         }
         stage('docker build') {
