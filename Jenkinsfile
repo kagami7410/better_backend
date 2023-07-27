@@ -18,7 +18,7 @@ pipeline {
             script{
                     def mvnHOME = tool name: 'maven', type: 'maven'
                     sh 'java -version'
-                    sh "${mvnHOME}/bin/mvn compile"
+                    sh "${mvnHOME}/bin/mvn -version"
                     sh "${mvnHOME}/bin/mvn clean package"
                   }
             }
