@@ -61,6 +61,10 @@
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version> 3.11.0</version>
+				<configuration>
+					<source>17</source>  <!-- same as <java.version> -->
+					<target>17</target>    <!-- same as <java.version> -->
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>
