@@ -14,10 +14,9 @@ pipeline {
         }
         stage('maven package') {
             steps {
-                sh 'java -version'
-                sh 'mvn -version'
-                sh 'mvn clean compile'
-                sh 'mvn clean package'
+            def mvnHOME = tool name: 'maven', type: 'maven'
+            sh 'java -version'
+            sh '${mvnHOME}/bin/mvn clean package'
             }
         }
         stage('docker build') {
