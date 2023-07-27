@@ -1,10 +1,14 @@
+apply plugin: 'maven'
+
 pipeline {
     agent {
         kubernetes{
             inheritFrom 'kube-agent'
         }
     }
-
+    tools {
+        maven 'Maven_3.22'
+    }
     stages {
         stage('set up') {
             steps {
@@ -14,9 +18,7 @@ pipeline {
         }
         stage('maven package') {
             steps {
-                withMaven(maven: 'mvn'){
-                    sh 'mvn clean package'
-                }
+                sh 'mvn clean package'
             }
         }
         stage('docker build') {
