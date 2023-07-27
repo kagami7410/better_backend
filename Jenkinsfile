@@ -5,6 +5,11 @@ pipeline {
         }
     }
 
+    tools {
+        maven 'maven'
+        jdk 'java'
+    }
+
     stages {
         stage('set up') {
             steps {
@@ -17,10 +22,10 @@ pipeline {
         stage('maven package') {
         steps {
             script{
-                    def mvnHOME = tool name: 'maven', type: 'maven'
+//                     def mvnHOME = tool name: 'maven', type: 'maven'
                     sh 'java -version'
-                    sh "${mvnHOME}/bin/mvn -version"
-                    sh "${mvnHOME}/bin/mvn clean package"
+                    sh "mvn -version"
+                    sh "mvn clean package"
                   }
             }
         }
