@@ -1,7 +1,7 @@
 pipeline {
     agent {
         kubernetes{
-            inheritFrom 'kube-agent'
+            label 'kubeagent'
         }
     }
 
