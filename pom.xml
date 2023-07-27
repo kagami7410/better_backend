@@ -14,6 +14,7 @@
 	<name>backend_app</name>
 	<description>Demo project for Spring Boot</description>
 	<properties>
+		<maven-builder-helper.version>3.3.0</maven-builder-helper.version>
 		<java.version>11</java.version>
 	</properties>
 	<dependencies>
@@ -36,6 +37,13 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
+
+		</dependency>
+
+		<dependency>
+			<groupId>org.codehaus.mojo</groupId>
+			<artifactId>build-helper-maven-plugin</artifactId>
+			<version>${maven-builder-helper.version}</version>
 		</dependency>
 
 		<dependency>
