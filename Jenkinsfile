@@ -10,6 +10,7 @@ pipeline {
             steps {
                 sh 'rm -rf better_backend'
                 sh 'git clone https://github.com/kagami7410/better_backend.git '
+                sh 'java -version'
             }
         }
 
