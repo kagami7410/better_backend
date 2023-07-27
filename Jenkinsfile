@@ -7,7 +7,7 @@ pipeline {
 
     tools {
         maven 'maven'
-   
+
     }
 
     stages {
