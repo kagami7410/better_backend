@@ -4,9 +4,7 @@ pipeline {
             inheritFrom 'kube-agent'
         }
     }
-    tools {
-        maven 'maven'
-    }
+
     stages {
         stage('set up') {
             steps {
