@@ -7,7 +7,7 @@ pipeline {
                 spec:
                     containers:
                     - name: maven
-                      image: open-jdk17
+                      image: openjdk:17
                       command:
                       - cat 
                       tty: true
