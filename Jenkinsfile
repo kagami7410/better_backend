@@ -6,11 +6,6 @@ pipeline {
                 kind: Pod
                 spec:
                     containers:
-                    - name: java
-                      image: openjdk:17
-                      command:
-                      - cat 
-                      tty: true
                    - name: docker-container
                      image: docker
                      command:
@@ -39,21 +34,21 @@ pipeline {
                 sh 'java -version'
             }
         }
-
-        stage('maven package') {
-        steps {
-            script{
-                container("java")
-                        {
-                            //                     def mvnHOME = tool name: 'maven', type: 'maven'
-                            sh 'java -version'
-                            sh "mvn -version"
-                            sh 'mvn compile'
-                            sh "mvn clean package"
-                        }
-                  }
-            }
-        }
+//
+//        stage('maven package') {
+//        steps {
+//            script{
+//                container("java")
+//                        {
+//                            //                     def mvnHOME = tool name: 'maven', type: 'maven'
+//                            sh 'java -version'
+//                            sh "mvn -version"
+//                            sh 'mvn compile'
+//                            sh "mvn clean package"
+//                        }
+//                  }
+//            }
+//        }
 
         stage('docker test') {
             steps {
