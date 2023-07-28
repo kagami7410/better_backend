@@ -11,11 +11,11 @@ pipeline {
                       command:
                       - cat 
                       tty: true
-                   - name: docker-container
-                     image: docker
-                     command:
-                     - cat
-                     tty: true
+                    - name: docker-container
+                      image: docker
+                      command:
+                      - cat
+                      tty: true
                      
 
                     '''
