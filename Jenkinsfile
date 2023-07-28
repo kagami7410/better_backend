@@ -11,8 +11,7 @@ pipeline {
                       command:
                       - cat 
                       tty: true
-                      
-                   - name: docker
+                   - name: docker-container
                      image: docker
                      command:
                      - cat
@@ -59,7 +58,7 @@ pipeline {
         stage('docker test') {
             steps {
                 script{
-                    container("docker")
+                    container("docker-container")
                             {
                                 //                     def mvnHOME = tool name: 'maven', type: 'maven'
                                 sh 'docker pull openjdk:17'
