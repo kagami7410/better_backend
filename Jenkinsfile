@@ -15,11 +15,11 @@ pipeline {
                       image: docker
                       command:
                       - cat
-                      volumes:
-                      - name: docker-sock-volume
-                      - hostPath: 
-                         path: var/run/docker.sock
-                        name: dockersock
+                    volumes:
+                     - name: docker-sock-volume
+                     - hostPath: 
+                        path: var/run/docker.sock
+                       name: dockersock
                         
                       volumeMounts:
                         - name: docker-sock-volume
