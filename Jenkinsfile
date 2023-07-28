@@ -6,18 +6,12 @@ pipeline {
                 kind: Pod
                 spec:
                     containers:
-                   - name: docker-container
-                     image: docker
-                     command:
-                     - cat
-                     tty: true
-                   volumes:
-                    - name: docker-sock-volume
-                      hostPath: 
-                        path: var/run/docker.sock
-                   volumeMounts:
-                    - name: docker-sock-volume
-                      mountPath: /var/run/docker.sock
+                    - name: java
+                      image: openjdk:17
+                      command:
+                      - cat 
+                      tty: true
+
                     '''
         }
     }
@@ -34,34 +28,23 @@ pipeline {
                 sh 'java -version'
             }
         }
-//
-//        stage('maven package') {
-//        steps {
-//            script{
-//                container("java")
-//                        {
-//                            //                     def mvnHOME = tool name: 'maven', type: 'maven'
-//                            sh 'java -version'
-//                            sh "mvn -version"
-//                            sh 'mvn compile'
-//                            sh "mvn clean package"
-//                        }
-//                  }
-//            }
-//        }
 
-        stage('docker test') {
-            steps {
-                script{
-                    container("docker-container")
-                            {
-                                //                     def mvnHOME = tool name: 'maven', type: 'maven'
-                                sh 'docker pull openjdk:17'
-                                sh 'java -version'
-                            }
-                }
+        stage('maven package') {
+        steps {
+            script{
+                container("java")
+                        {
+                            //                     def mvnHOME = tool name: 'maven', type: 'maven'
+                            sh 'java -version'
+                            sh "mvn -version"
+                            sh 'mvn compile'
+                            sh "mvn clean package"
+                        }
+                  }
             }
         }
+
+
         stage('docker build') {
             steps {
                 sh 'docker build -t better_backend_app .'
