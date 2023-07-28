@@ -15,12 +15,6 @@ pipeline {
                      image: docker
                      command:
                      - cat
-                     volumeMounts:
-                        name: docker-sock-volume
-                        mountPath: /var/run/docker.sock
-                     - name: docker-sock-volume-host
-                     - hostPath: 
-                        path: var/run/docker.sock
                      tty: true
                      
 
