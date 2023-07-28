@@ -1,7 +1,21 @@
 pipeline {
     agent {
-        kubernetes{
+        kubernetes {
             inheritFrom ''
+            podTemplate(containers: [
+                    containerTemplate(name: 'maven', image: 'maven:3.3.9-jdk-8-alpine', ttyEnabled: true, command: 'cat'),
+            ]) {
+                node(POD_LABEL) {
+                    stage('Get a Maven version') {
+                        container('maven') {
+                            stage('Build a Maven project') {
+                                sh 'mvn -version'
+                                sh 'java -version'
+                            }
+                        }
+                    }
+                }
+            }
         }
     }
 
@@ -9,9 +23,6 @@ pipeline {
         maven 'maven'
     }
 
-    podTemplate(containers: [
-            containerTemplate(name: 'maven', image: 'maven:3.3.9-jdk-8-alpine', ttyEnabled: true, command: 'cat'),
-    ]) {
 
         stages {
             stage('set up') {
@@ -22,17 +33,6 @@ pipeline {
                 }
             }
 
-
-            node(POD_LABEL) {
-                stage('Get a Maven version') {
-                    container('maven') {
-                        stage('Build a Maven project') {
-                            sh 'mvn -version'
-                            sh 'java -version'
-                        }
-                    }
-                }
-            }
 
             stage('maven package') {
                 steps {
@@ -57,6 +57,6 @@ pipeline {
                     echo("deployed!")
                 }
             }
-        }
+
     }
 }
