@@ -6,7 +6,7 @@ pipeline {
                 kind: Pod
                 spec:
                     containers:
-                    - name: maven
+                    - name: java
                       image: openjdk:17
                       command:
                       - cat 
@@ -31,11 +31,14 @@ pipeline {
         stage('maven package') {
         steps {
             script{
-//                     def mvnHOME = tool name: 'maven', type: 'maven'
-                    sh 'java -version'
-                    sh "mvn -version"
-                    sh 'mvn compile'
-                    sh "mvn clean package"
+                container("java")
+                        {
+                            //                     def mvnHOME = tool name: 'maven', type: 'maven'
+                            sh 'java -version'
+                            sh "mvn -version"
+                            sh 'mvn compile'
+                            sh "mvn clean package"
+                        }
                   }
             }
         }
