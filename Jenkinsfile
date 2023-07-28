@@ -1,7 +1,17 @@
 pipeline {
     agent {
         kubernetes{
-            inheritFrom ''
+            yaml '''
+                apiVersion: v1
+                kind: Pod
+                spec:
+                    containers:
+                    - name: maven
+                      image: open-jdk17
+                      command:
+                        - cat 
+                        tty: true
+                        '''
         }
     }
 
@@ -19,9 +29,6 @@ pipeline {
         }
 
         stage('maven package') {
-            agent{
-                docker{ image 'open-jdk17'}
-            }
         steps {
             script{
 //                     def mvnHOME = tool name: 'maven', type: 'maven'
