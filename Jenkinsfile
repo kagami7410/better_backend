@@ -1,20 +1,7 @@
 pipeline {
     agent {
-        kubernetes {
-            podTemplate(containers: [
-                    containerTemplate(name: 'maven', image: 'maven:3.3.9-jdk-8-alpine', ttyEnabled: true, command: 'cat'),
-            ]) {
-                node(POD_LABEL) {
-                    stage('Get a Maven version') {
-                        container('maven') {
-                            stage('Build a Maven project') {
-                                sh 'mvn -version'
-                                sh 'java -version'
-                            }
-                        }
-                    }
-                }
-            }
+        kubernetes{
+            inheritFrom ''
         }
     }
 
@@ -22,40 +9,40 @@ pipeline {
         maven 'maven'
     }
 
+    stages {
+        stage('set up') {
+            steps {
+                sh 'rm -rf better_backend'
+                sh 'git clone https://github.com/kagami7410/better_backend.git '
+                sh 'java -version'
+            }
+        }
 
-        stages {
-            stage('set up') {
-                steps {
-                    sh 'rm -rf better_backend'
-                    sh 'git clone https://github.com/kagami7410/better_backend.git '
+        stage('maven package') {
+            agent{
+                docker{ image 'open-jdk17'}
+            }
+        steps {
+            script{
+//                     def mvnHOME = tool name: 'maven', type: 'maven'
                     sh 'java -version'
-                }
+                    sh "mvn -version"
+                    sh 'mvn compile'
+                    sh "mvn clean package"
+                  }
             }
-
-
-            stage('maven package') {
-                steps {
-                    script{
-    //                     def mvnHOME = tool name: 'maven', type: 'maven'
-                        sh 'java -version'
-                        sh "mvn -version"
-                        sh 'mvn compile'
-                        sh "mvn clean package"
-                    }
-                }
-            }
-            stage('docker build') {
-                steps {
-                    sh 'docker build -t better_backend_app .'
-                    sh 'docker tag better_backend_app sujan7410/better_back_end:v1.1.0'
-                    sh 'docker push sujan7410/better_back_end:v1.1.0'
-                }
-            }
-            stage('deploy'){
-                steps{
-                    echo("deployed!")
-                }
-            }
-
+        }
+        stage('docker build') {
+            steps {
+                sh 'docker build -t better_backend_app .'
+                sh 'docker tag better_backend_app sujan7410/better_back_end:v1.1.0'
+                sh 'docker push sujan7410/better_back_end:v1.1.0'
+        }
     }
+        stage('deploy'){
+            steps{
+                echo("deployed!")
+            }
+        }
+  }
 }
