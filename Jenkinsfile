@@ -11,6 +11,19 @@ pipeline {
                       command:
                       - cat 
                       tty: true
+                      
+                   - name: docker
+                     image: docker
+                     command:
+                     - cat
+                     tty: true
+                   volumes:
+                    - name: docker-sock-volume
+                      hostPath: 
+                        path: var/run/docker.sock
+                   volumeMounts:
+                    - name: docker-sock-volume
+                      mountPath: /var/run/docker.sock
                     '''
         }
     }
@@ -40,6 +53,19 @@ pipeline {
                             sh "mvn clean package"
                         }
                   }
+            }
+        }
+
+        stage('docker test') {
+            steps {
+                script{
+                    container("docker")
+                            {
+                                //                     def mvnHOME = tool name: 'maven', type: 'maven'
+                                sh 'docker pull openjdk:17'
+                                sh 'java -version'
+                            }
+                }
             }
         }
         stage('docker build') {
