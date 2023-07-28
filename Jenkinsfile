@@ -9,9 +9,9 @@ pipeline {
                     - name: maven
                       image: open-jdk17
                       command:
-                        - cat 
-                        tty: true
-                        '''
+                      - cat 
+                      tty: true
+                    '''
         }
     }
 
