@@ -22,10 +22,8 @@ pipeline {
                        
                     volumes:
                     - name: docker-sock-volume
-                    - hostPath: 
-                       path: /var/run/docker.sock
-                      name: dockersock
-                        
+                      persistentVolumeClaim:
+                        claimName: docker-sock-pvc
                     
                       
                     '''
