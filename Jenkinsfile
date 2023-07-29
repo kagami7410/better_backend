@@ -18,7 +18,7 @@ pipeline {
                       tty: true
                       volumeDevices:
                       - name: docker-sock-volume
-                        mountPath: /var/run/docker.sock
+                        devicePath: /var/run/docker.sock
                        
                     volumes:
                     - name: docker-sock-volume
