@@ -14,13 +14,18 @@ pipeline {
                       volumeMounts:
                       - name: docker-sock-volume
                         mountPath: /var/run/docker.sock
-                        readOnly: false                      
+                        readOnly: false   
+                      - name: docker-directory    
+                        mountPath: /var/lib/docker 
+                                        
                        
                     volumes:
                     - name: docker-sock-volume
                       hostPath:
                         path: "/var/run/docker.sock"
-                      
+                    - name: docker-directory
+                      hostPath:
+                        path: "/var/lib/docker"                   
                     '''
         }
     }
