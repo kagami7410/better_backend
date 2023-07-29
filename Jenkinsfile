@@ -24,7 +24,6 @@ pipeline {
                     - name: docker-sock-volume
                     - hostPath: 
                        path: var/run/docker.sock
-                      name: dockersock
                         
                     
                       
