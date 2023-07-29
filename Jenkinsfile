@@ -16,15 +16,16 @@ pipeline {
                       command:
                       - cat
                       tty: true
-                      volumeDevices:
+                      volumeMounts:
                       - name: docker-sock-volume
-                        devicePath: /var/run/docker.sock
+                        mountPath: /var/run/docker.sock
+                        readOnly: false
                        
                     volumes:
                     - name: docker-sock-volume
-                      persistentVolumeClaim:
-                        claimName: docker-sock-pvc
-                    
+                      hostPath:
+                        path: "/var/run/docker.sock"
+                        type: File                  
                       
                     '''
         }
