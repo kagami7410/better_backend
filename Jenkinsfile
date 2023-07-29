@@ -16,7 +16,8 @@ pipeline {
                         mountPath: /var/run/docker.sock
                         readOnly: false   
                       - name: docker-directory    
-                        mountPath: /var/lib/docker 
+                        mountPath: /var/lib/docker
+                        readOnly: false 
                                         
                        
                     volumes:
