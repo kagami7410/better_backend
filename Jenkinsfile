@@ -16,15 +16,17 @@ pipeline {
                       command:
                       - cat
                       tty: true
+                      volumeMounts:
+                     - name: docker-sock-volume
+                       mountPath: /var/run/docker.sock
+                       
                     volumes:
                      - name: docker-sock-volume
                      - hostPath: 
                         path: var/run/docker.sock
                        name: dockersock
                         
-                    volumeMounts:
-                     - name: docker-sock-volume
-                       mountPath: /var/run/docker.sock
+                    
                       
                     '''
         }
