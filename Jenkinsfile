@@ -20,7 +20,7 @@ pipeline {
                       - name: docker-sock-volume
                         mountPath: /var/run/docker.sock
                        
-                   volumes:
+                    volumes:
                     - name: docker-sock-volume
                     - hostPath: 
                        path: var/run/docker.sock
