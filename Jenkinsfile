@@ -11,15 +11,10 @@ pipeline {
                       command:
                       - cat 
                       tty: true
-                    - name: docker-container
-                      image: docker
-                      command:
-                      - cat
-                      tty: true
                       volumeMounts:
                       - name: docker-sock-volume
                         mountPath: /var/run/docker.sock
-                        readOnly: false
+                        readOnly: false                      
                        
                     volumes:
                     - name: docker-sock-volume
@@ -53,23 +48,12 @@ pipeline {
                             sh "mvn -version"
                             sh 'mvn compile'
                             sh "mvn clean package"
+                            sh "docker pull alpine"
                         }
                   }
             }
         }
 
-        stage('docker test') {
-            steps {
-                script{
-                    container("docker-container")
-                            {
-                                //                     def mvnHOME = tool name: 'maven', type: 'maven'
-                                sh 'docker pull openjdk:17'
-                                sh 'java -version'
-                            }
-                }
-            }
-        }
         stage('docker build') {
             steps {
                 sh 'docker build -t better_backend_app .'
