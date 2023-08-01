@@ -7,7 +7,7 @@ pipeline {
                 spec:
                     containers:
                     - name: agent-container
-                      image: sujan7410/kubernetes-agent:v1.1.0
+                      image: sujan7410/kubernetes_agent:v1.2.0
                       command:
                       - cat
                       tty: true
