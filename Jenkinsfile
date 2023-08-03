@@ -60,7 +60,7 @@ pipeline {
 
         stage('deploy'){
             steps{
-                sh 'helm create '
+                sh 'deployed! '
             }
         }
   }
