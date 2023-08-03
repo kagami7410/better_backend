@@ -7,7 +7,7 @@ pipeline {
                 spec:
                     containers:
                     - name: agent-container
-                      image: sujan7410/kubernetes_agent:v1.2.0
+                      image: sujan7410/kubernetes_agent:v1.2.1
                       command:
                       - cat
                       tty: true
@@ -20,6 +20,8 @@ pipeline {
                     - name: docker-sock-volume
                       hostPath:
                         path: "/var/run/docker.sock"
+                        
+                  
                       
                     '''
         }
@@ -57,7 +59,7 @@ pipeline {
 
         stage('deploy'){
             steps{
-                sh 'kubectl get nodes'
+                sh 'helm create '
             }
         }
   }
