@@ -45,15 +45,14 @@ pipeline {
             script{
                 container("agent-container")
                         {
-                            sh 'git clone https://github.com/kagami7410/basic-helm-charts.git'
                             //                     def mvnHOME = tool name: 'maven', type: 'maven'
                             sh 'java -version'
                             sh "mvn -version"
                             sh 'mvn compile'
                             sh "mvn clean package"
                             sh 'docker pull openjdk:17'
-                            sh 'helm template basic-helm-charts/basicHelmChart --valuesbasic-helm-charts/basicHelmChart/values.yaml  '
-
+//                            sh 'helm template basic-helm-charts/basicHelmChart --valuesbasic-helm-charts/basicHelmChart/values.yaml  '
+                            sh 'helm create template test_template'
                         }
                   }
             }
