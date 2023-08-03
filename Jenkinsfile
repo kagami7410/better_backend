@@ -52,7 +52,7 @@ pipeline {
                             sh "mvn clean package"
                             sh 'docker pull openjdk:17'
 //                            sh 'helm template basic-helm-charts/basicHelmChart --valuesbasic-helm-charts/basicHelmChart/values.yaml  '
-                            sh 'helm create template test_template'
+                            sh 'helm create test_template'
                         }
                   }
             }
