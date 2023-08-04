@@ -1,3 +1,5 @@
+@Library("jenkins_library") _
+
 pipeline {
     agent {
         kubernetes{
@@ -58,9 +60,9 @@ pipeline {
             }
         }
 
-        stage('deploy'){
+        stage('test library '){
             steps{
-                sh ' echo deployed! '
+                backendPipeline()
             }
         }
   }
