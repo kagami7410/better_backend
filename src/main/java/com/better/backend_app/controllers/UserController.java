@@ -9,6 +9,7 @@ import com.better.backend_app.repositories.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
@@ -40,5 +41,13 @@ public class UserController {
     @GetMapping("users/getAll")
     private List<User> getUsers(){
         return userRepository.findAll();
+    }
+
+    @DeleteMapping("users/delete")
+    private String deleteUser(@RequestParam Long id){
+        User user = userRepository.findById(id).orElseThrow();
+        userRepository.delete(user);
+        String name = user.getFirstName();
+        return "User: " + name + " deleted!";
     }
 }

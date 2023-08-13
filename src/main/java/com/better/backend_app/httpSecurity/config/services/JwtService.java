@@ -1,5 +1,6 @@
 package com.better.backend_app.httpSecurity.config.services;
 
+import com.better.backend_app.models.User;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -24,7 +25,7 @@ public class JwtService {
         return  extractClaim(token, Claims::getSubject);
     }
 
-    public String generateToken(UserDetails userDetails){
+    public String generateToken(User userDetails){
         return generateToken(new HashMap<>(), userDetails );
     }
 
@@ -41,12 +42,15 @@ public class JwtService {
         return extractClaim(token, Claims::getExpiration);
     }
 
-    public String generateToken(Map<String, Object> extraClaims,
-                                UserDetails userDetails){
+    public String generateToken(Map<String, String> extraClaims,
+                                User user){
+        String email = user.getEmail();
         return Jwts
                 .builder()
+                .setIssuer("Better_Backend")
                 .setClaims(extraClaims)
-                .setSubject(userDetails.getPassword())
+                .claim("email", email)
+                .setSubject(user.getFirstName())
                 .setIssuedAt(new Date(System.currentTimeMillis()))
                 .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 24))
                 .signWith(getSignInKey(), SignatureAlgorithm.HS256)

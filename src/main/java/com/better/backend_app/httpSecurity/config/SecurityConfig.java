@@ -42,6 +42,8 @@ public class SecurityConfig {
                                 authz
                                         .requestMatchers("/register")
                                         .permitAll()
+                                        .requestMatchers("/authenticate")
+                                        .permitAll()
                                         .requestMatchers("/users/**")
                                         .permitAll()
                                         .anyRequest()
