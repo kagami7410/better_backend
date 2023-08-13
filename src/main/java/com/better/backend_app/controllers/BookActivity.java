@@ -29,7 +29,5 @@ public class BookActivity {
         LocalDate date = activityDate.getDate();
         return new ResponseEntity<>("Your booking for " + activity + " is confirmed on " + date + " from: " + timeSlotToBeUpdated.getStartTime() + " to " + timeSlotToBeUpdated.getEndTime(),
                 HttpStatus.OK);
-
-
     }
 }

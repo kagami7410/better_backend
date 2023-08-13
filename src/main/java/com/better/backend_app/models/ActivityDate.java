@@ -25,13 +25,13 @@ public class ActivityDate {
     DayOfWeek dayOfWeek;
 
     @OneToMany(mappedBy = "activityDate", cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
-    @JsonIgnoreProperties({"activityDate", "acitvity"})
+    @JsonIgnoreProperties({"activityDate"})
     private List<TimeSlot> timeSlots;
 
     @ManyToOne
 
     @JoinColumn(name = "activity_id")
-    @JsonIgnoreProperties({"leisureCentre", "activityDates"})
+    @JsonIgnoreProperties({"activityDates"})
     private Activity activity;
 
 

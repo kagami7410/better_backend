@@ -29,8 +29,12 @@ public class TimeSlot {
     private boolean availability;
 
     @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
+
+    @ManyToOne
     @JoinColumn(name = "activityDate_id")
-    @JsonIgnoreProperties({"dayOfWeek", "timeSlots", "activity", "id"})
+    @JsonIgnoreProperties({ "timeSlots", "id"})
     private ActivityDate activityDate;
 
     @Override

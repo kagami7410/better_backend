@@ -31,7 +31,7 @@ public class SchedulerService {
 //        System.out.println("Scheduled job: " + " Current Time: " + LocalTime.now());
 //    }
 
-    @Scheduled(cron = "1 * * * * ? ")
+    @Scheduled(cron = "* 1 * * * ? ")
     public void updateActivityBookingDates(){
         List<ActivityDate> activityDates = activityDateRepository.findAll();
         List<Activity> activities = activityRepository.findAll();
