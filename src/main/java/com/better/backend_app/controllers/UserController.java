@@ -32,10 +32,10 @@ public class UserController {
     }
 
     @PostMapping("/authenticate")
-    public ResponseEntity<AuthenticationResponse> authenticate(
+    public String authenticate(
             @RequestBody AuthenticationRequest request
             ){
-        return ResponseEntity.ok(authenticationService.authenticate(request));
+        return request.getEmail();
     }
 
     @GetMapping("users/getAll")
