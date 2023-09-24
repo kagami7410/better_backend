@@ -1,15 +1,14 @@
 package com.better.backend_app.controllers;
 
 import com.better.backend_app.httpSecurity.config.services.AuthenticationService;
-import com.better.backend_app.models.AuthenticationRequest;
-import com.better.backend_app.models.AuthenticationResponse;
-import com.better.backend_app.models.RegisterRequest;
+import com.better.backend_app.securityModels.AuthenticationRequest;
+import com.better.backend_app.securityModels.AuthenticationResponse;
+import com.better.backend_app.securityModels.RegisterRequest;
 import com.better.backend_app.models.User;
 import com.better.backend_app.repositories.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
@@ -31,11 +30,18 @@ public class UserController {
         return ResponseEntity.ok(authenticationService.register(request));
     }
 
+//    @PostMapping("/authenticate")
+//    public String authenticate(
+//            @RequestBody AuthenticationRequest request
+//            ){
+//        return request.getEmail();
+//    }
+
     @PostMapping("/authenticate")
-    public String authenticate(
+    public ResponseEntity<AuthenticationResponse> authenticate(
             @RequestBody AuthenticationRequest request
-            ){
-        return request.getEmail();
+    ) {
+        return ResponseEntity.ok(authenticationService.authenticate(request));
     }
 
     @GetMapping("users/getAll")

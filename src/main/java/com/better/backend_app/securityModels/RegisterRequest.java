@@ -1,5 +1,6 @@
-package com.better.backend_app.models;
+package com.better.backend_app.securityModels;
 
+import com.better.backend_app.models.Role;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -14,5 +15,6 @@ public class RegisterRequest {
     private String lastname;
     private String password;
     private String email;
+    private Role role;
 
 }

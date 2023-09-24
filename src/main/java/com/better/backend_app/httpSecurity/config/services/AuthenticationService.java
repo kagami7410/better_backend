@@ -1,15 +1,14 @@
 package com.better.backend_app.httpSecurity.config.services;
 
-import com.better.backend_app.models.AuthenticationRequest;
-import com.better.backend_app.models.AuthenticationResponse;
-import com.better.backend_app.models.RegisterRequest;
+import com.better.backend_app.securityModels.AuthenticationRequest;
+import com.better.backend_app.securityModels.AuthenticationResponse;
+import com.better.backend_app.securityModels.RegisterRequest;
 import com.better.backend_app.models.User;
 import com.better.backend_app.repositories.UserRepository;
 import lombok.RequiredArgsConstructor;
 
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -28,6 +27,7 @@ public class AuthenticationService {
         user.setPassword(passwordEncoder.encode(request.getPassword()));
         user.setFirstName(request.getFirstname());
         user.setLastName(request.getLastname());
+        user.setRole(request.getRole());
         userRepository.save(user);
         var jwtToken = jwtService.generateToken(user);
         return AuthenticationResponse.builder()
