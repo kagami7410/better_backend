@@ -1,5 +1,6 @@
 package com.better.backend_app.controllers;
 
+import com.better.backend_app.httpSecurity.config.JwtAuthenticationFilter;
 import com.better.backend_app.httpSecurity.config.services.AuthenticationService;
 import com.better.backend_app.securityModels.AuthenticationRequest;
 import com.better.backend_app.securityModels.AuthenticationResponse;
@@ -7,6 +8,8 @@ import com.better.backend_app.securityModels.RegisterRequest;
 import com.better.backend_app.models.User;
 import com.better.backend_app.repositories.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -14,14 +17,16 @@ import org.springframework.web.bind.annotation.*;
 import java.util.*;
 
 @RestController
-@RequiredArgsConstructor
+@RequestMapping
 public class UserController {
 
-    private final AuthenticationService authenticationService;
+    @Autowired
+    private AuthenticationService authenticationService;
 
     @Autowired
     private UserRepository userRepository;
 
+    Logger logger = LoggerFactory.getLogger(UserController.class);
 
 
     @PostMapping("/register")
@@ -41,12 +46,13 @@ public class UserController {
     public ResponseEntity<AuthenticationResponse> authenticate(
             @RequestBody AuthenticationRequest request
     ) {
+        logger.info("Autenticating...");
         return ResponseEntity.ok(authenticationService.authenticate(request));
     }
 
-    @GetMapping("users/getAll")
-    private List<User> getUsers(){
-        return userRepository.findAll();
+    @GetMapping("/users/getAll")
+    private String getUsers(){
+       return "hi";
     }
 
     @DeleteMapping("users/delete")

@@ -3,6 +3,7 @@ package com.better.backend_app.httpSecurity.config;
 
 import com.better.backend_app.httpSecurity.config.JwtAuthenticationFilter;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -25,11 +26,14 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @RequiredArgsConstructor
 public class SecurityConfig {
 
-    private final JwtAuthenticationFilter jwtAuthFilter;
+    @Autowired
+    private JwtAuthenticationFilter jwtAuthFilter;
 
-    private final AuthenticationProvider authenticationProvider;
+     @Autowired
+     private AuthenticationProvider authenticationProvider;
 
     //When application starts, spring secuirty looks for SecurityFilterChian bean
+
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
@@ -44,10 +48,11 @@ public class SecurityConfig {
                                         .permitAll()
                                         .requestMatchers("/authenticate")
                                         .permitAll()
-                                        .requestMatchers("/users/**")
-                                        .permitAll()
+//                                        .requestMatchers("/users/**")
+//                                        .permitAll()
                                         .anyRequest()
-                                        .denyAll()
+//                                        .denyAll()
+                                        .authenticated()
 
                                         .and()
                                         .sessionManagement()
@@ -58,13 +63,8 @@ public class SecurityConfig {
                             } catch (Exception e) {
                                 throw new RuntimeException(e);
                             }
-                        }
+                        });
 
-                )
-                .httpBasic(Customizer.withDefaults());
         return http.build();
-
-
     }
-
 }

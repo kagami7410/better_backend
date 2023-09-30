@@ -35,9 +35,13 @@ public class ActivityController {
     @Autowired
     CalenderService calenderService;
 
+//    @GetMapping("/activity/getAll")
+//    public List<Activity> getActivities(){
+//        return activityRepository.findAll();
+//    }
     @GetMapping("/activity/getAll")
-    public List<Activity> getActivities(){
-        return activityRepository.findAll();
+    public String getActivities(){
+        return "lol";
     }
 
     @DeleteMapping("/activity/deleteAll")

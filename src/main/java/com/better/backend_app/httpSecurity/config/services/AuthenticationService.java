@@ -1,5 +1,6 @@
 package com.better.backend_app.httpSecurity.config.services;
 
+import com.better.backend_app.httpSecurity.config.JwtAuthenticationFilter;
 import com.better.backend_app.securityModels.AuthenticationRequest;
 import com.better.backend_app.securityModels.AuthenticationResponse;
 import com.better.backend_app.securityModels.RegisterRequest;
@@ -7,6 +8,8 @@ import com.better.backend_app.models.User;
 import com.better.backend_app.repositories.UserRepository;
 import lombok.RequiredArgsConstructor;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -15,6 +18,9 @@ import org.springframework.stereotype.Service;
 @Service
 @RequiredArgsConstructor
 public class AuthenticationService {
+
+    Logger logger = LoggerFactory.getLogger(AuthenticationService.class);
+
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     private final JwtService jwtService;
