@@ -22,7 +22,7 @@ import org.springframework.web.filter.OncePerRequestFilter;
 import java.io.IOException;
 
 @Component
-@RequiredArgsConstructor
+//@RequiredArgsConstructor
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
 //    @Autowired
@@ -30,8 +30,11 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 //    @Autowired
 //    private UserDetailsService userDetailsService;
 
-    private final JwtService jwtService;
-    private final UserDetailsService userDetailsService;
+    @Autowired
+    private JwtService jwtService;
+
+    @Autowired
+    private UserDetailsService userDetailsService;
     Logger logger = LoggerFactory.getLogger(JwtAuthenticationFilter.class);
 
     @Override
